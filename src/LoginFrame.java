@@ -31,6 +31,11 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(loginPanel, "Ihre Email/Passwort Kombination ist nicht gültig.", "Fehler beim Login", JOptionPane.ERROR_MESSAGE);
                 else
                     JOptionPane.showMessageDialog(loginPanel, "Login erfolgreich, sie sind eingeloggt.");
+                    dispose();
+                    Mainpage mainpage =new Mainpage();
+
+
+
             }
         });
     }
@@ -42,5 +47,6 @@ public class LoginFrame extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setSize(400, 200);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 }

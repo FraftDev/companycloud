@@ -1,3 +1,5 @@
+import DataAccess.Database;
+
 import javax.swing.*;
 
 public class Upload extends JFrame{
@@ -11,11 +13,13 @@ public class Upload extends JFrame{
         setContentPane(mainPanelUpload);
         setTitle("Upload");
         setSize(800, 400);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setVisible(true);
     }
 
     public static void main(String[] args){
-        Upload mainPanelUpload =new Upload();
+        Upload mainPanelUpload =new Upload(); //wenn man upload selbständig öffnen möchte
+        mainPanelUpload.setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
     }
 }

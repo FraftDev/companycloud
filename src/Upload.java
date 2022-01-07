@@ -16,6 +16,7 @@ public class Upload extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setVisible(true);
+        setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
     }
 
     public static void main(String[] args){

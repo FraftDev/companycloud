@@ -1,3 +1,5 @@
+import DataAccess.Database;
+
 import javax.swing.*;
 
 public class Adminpage extends JFrame{
@@ -31,6 +33,8 @@ public class Adminpage extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
     }
 
     public static void main(String[] args){

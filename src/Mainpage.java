@@ -41,7 +41,7 @@ public class Mainpage extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if (e.getSource() == adminMenuButton) {
-                    //admin Button
+                    Adminpage adminpagePanel =new Adminpage();
                 }
             }
         });

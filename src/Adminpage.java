@@ -33,7 +33,7 @@ public class Adminpage extends JFrame{
     }
 
     public static void main(String[] args){
-        Adminpage mainPanelUpload =new Adminpage();
+        Adminpage adminpagePanel =new Adminpage();
     }
 
 }

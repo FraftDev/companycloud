@@ -36,6 +36,15 @@ public class Mainpage extends JFrame {
                 }
             }
         });
+        downloadButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == downloadButton) {
+                    Download downloadPanel =new Download();
+                }
+            }
+        });
         adminMenuButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

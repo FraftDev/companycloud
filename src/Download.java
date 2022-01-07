@@ -13,9 +13,10 @@ public class Download extends JFrame{
         setSize(800, 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     public static void main(String[] args){
-        Download mainPanelUpload =new Download();
+        Download downloadPanel =new Download();
     }
 }

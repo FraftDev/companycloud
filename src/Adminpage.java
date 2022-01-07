@@ -30,6 +30,7 @@ public class Adminpage extends JFrame{
         setSize(800, 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     public static void main(String[] args){

@@ -1,1 +1,5 @@
-Friedrich;Kräft;fraftdev@gmail.com;123;21.12.2021;UP;Informations Technologie
+Vorname;Nachname;email;password;Registrierungsdatum;Firma;Abteilung
+Friedrich;Kräft;fraftdev@gmail.com;123;21.12.2021;DevTeam;Informations Technologie
+Alex;Muster;alex.muster@firma.de;1234;06.12.2021 12:30;Firma1;Recherche
+Kim;Beispiel;kbeispiel@firma.de;1111;01.12.2021 16:23;Firma1;
+Same;Noel;noel_sam@firma.de;kekse;24.12.2020 09:50;Firma1;Recherche

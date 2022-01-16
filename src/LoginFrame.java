@@ -33,6 +33,13 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(loginPanel, "Login erfolgreich, sie sind eingeloggt.");
             }
         });
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public static void main(String[] args){

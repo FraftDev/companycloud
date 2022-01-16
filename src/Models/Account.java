@@ -13,8 +13,9 @@ public class Account {
     public LocalDate registeredAt;
     public String company;
     public String department;
+    public int verified;
 
-    public Account(String _firstName, String _lastname, String _email, String _password, LocalDate _registeredAt, String _company, String _department){
+    public Account(String _firstName, String _lastname, String _email, String _password, LocalDate _registeredAt, String _company, String _department, int _verified){
         firstname = _firstName;
         lastname = _lastname;
         email = _email;
@@ -22,10 +23,11 @@ public class Account {
         registeredAt = _registeredAt;
         company = _company;
         department = _department;
+        verified = _verified;
     }
 
     public String toString(){
-        return String.format("%s;%s;%s;%s;%s;%s;%s", firstname, lastname, email, password, registeredAt, company, department);
+        return String.format("%s;%s;%s;%s;%s;%s;%s;%s", firstname, lastname, email, password, registeredAt, company, department, verified);
     }
 
     public static Account Login(String _email, String _password){
@@ -54,7 +56,8 @@ public class Account {
                     accountSplit[3],
                     LocalDate.parse(accountSplit[4], DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN)),
                     accountSplit[5],
-                    accountSplit[6]
+                    accountSplit[6],
+                    Integer.parseInt(accountSplit[7])
             );
 
             accountObjects.add(newAccount);

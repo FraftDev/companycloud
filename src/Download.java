@@ -9,7 +9,7 @@ public class Download extends JFrame{
     private JLabel DownloadHeader;
 
 
-    public  Download(){
+    public Download(){
         setContentPane(MainPanelDownload);
         setTitle("Download");
         setSize(800, 400);

@@ -1,6 +1,8 @@
 import DataAccess.Database;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Adminpage extends JFrame{
     private JPanel AdminpagePanel;
@@ -24,6 +26,7 @@ public class Adminpage extends JFrame{
     private JLabel TotalStatusLabel;
     private JLabel IndividualStatusLabel;
     private JLabel DepartmentStatusLabel;
+    private JButton registrierungenButton;
 
 
     public  Adminpage(){
@@ -35,6 +38,15 @@ public class Adminpage extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
+        registrierungenButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == registrierungenButton) {
+                    RegistrierungenAdminpage registrierungPanel =new RegistrierungenAdminpage();
+                }
+            }
+        });
     }
 
     public static void main(String[] args){

@@ -38,6 +38,29 @@ public class Account {
                 .orElse(null);
     }
 
+
+
+    public static Account Register(String firstname, String lastname, String email, String password, String companyName)
+    {
+        var accounts = GetAccounts();
+
+        if(accounts.stream().filter(x -> x.email.equals(email)).findAny().isPresent())
+            return null;
+
+        var companyCount = accounts.stream().filter(x -> x.company.equals(companyName)).count();
+
+        if(companyCount >= 10)
+            return null;
+
+        if(Company.GetCompanyByName(companyName) == null)
+            return null;
+
+        Account registeredAccount = new Account(firstname, lastname, email, password, LocalDate.now(), companyName, Company.GetCompanyByName(companyName).abteilung1, 0);
+        Database.WriteDatabase(registeredAccount.toString(), Database.ACCOUNT_PATH);
+
+        return registeredAccount;
+    }
+
     public static List<Account> GetAccounts(){
         List<Account> accountObjects = new ArrayList<>();
 
@@ -54,7 +77,7 @@ public class Account {
                     accountSplit[1],
                     accountSplit[2],
                     accountSplit[3],
-                    LocalDate.parse(accountSplit[4], DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN)),
+                    LocalDate.parse(accountSplit[4], DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.GERMAN)),
                     accountSplit[5],
                     accountSplit[6],
                     Integer.parseInt(accountSplit[7])

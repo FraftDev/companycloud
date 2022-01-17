@@ -29,11 +29,14 @@ public class LoginFrame extends JFrame {
 
                 if(loggedAccount == null)
                     JOptionPane.showMessageDialog(loginPanel, "Ihre Email/Passwort Kombination ist nicht gültig.", "Fehler beim Login", JOptionPane.ERROR_MESSAGE);
+                else if(loggedAccount.verified == 0)
+                    JOptionPane.showMessageDialog(loginPanel, "Ihr Account wurde noch nicht vom Administrator freigegeben.", "Fehler beim Login", JOptionPane.ERROR_MESSAGE);
                 else
+                {
                     JOptionPane.showMessageDialog(loginPanel, "Login erfolgreich, sie sind eingeloggt.");
                     dispose();
                     Mainpage mainpage =new Mainpage();
-
+                }
 
 
             }

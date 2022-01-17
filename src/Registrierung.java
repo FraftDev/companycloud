@@ -1,14 +1,19 @@
 import DataAccess.Database;
+import Models.Account;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Registrierung extends JFrame{
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JTextField Company;
+    private JTextField Firstname;
+    private JTextField Email;
+    private JTextField Password;
     private JPanel MainRegistrierungPanel;
     private JButton registrierenButton;
+    private JLabel Nachname;
+    private JTextField Lastname;
 
     public Registrierung(){
         setContentPane(MainRegistrierungPanel);
@@ -19,6 +24,25 @@ public class Registrierung extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
+        registrierenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String emailInput = Email.getText();
+                String passwordInput = Password.getText();
+                String companyInput = Company.getText();
+                String firstnameInput = Firstname.getText();
+                String lastnameInput = Lastname.getText();
+
+                Account registeredAccount = Account.Register(firstnameInput, lastnameInput, emailInput, passwordInput, companyInput);
+
+                if(registeredAccount == null)
+                    JOptionPane.showMessageDialog(MainRegistrierungPanel, "Bitte kontaktieren Sie ihren Administrator.", "Fehler beim Registrieren.", JOptionPane.ERROR_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(MainRegistrierungPanel, "Registrierung erfolgreich, so sind nun eingeloggt.");
+                    dispose();
+                    Mainpage mainpage = new Mainpage();
+            }
+        });
     }
 
     public static void main(String[] args){

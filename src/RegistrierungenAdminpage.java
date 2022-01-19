@@ -3,10 +3,10 @@ import DataAccess.Database;
 import javax.swing.*;
 
 public class RegistrierungenAdminpage extends JFrame{
-    private JTextArea textArea1;
     private JPanel RegistrierungMainPanel;
     private JButton zulassenButton;
     private JButton ablehnenButton;
+    private JList list1;
     private JScrollBar scrollBar1;
 
 

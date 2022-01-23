@@ -2,12 +2,17 @@ import DataAccess.Database;
 import DataAccess.Globals;
 
 import javax.swing.*;
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
+
+import Extensions.*;
 
 public class Mainpage extends JFrame {
     private JPanel mainPanel;
@@ -15,10 +20,11 @@ public class Mainpage extends JFrame {
     private JButton aktualisierenButton;
     private JButton sortierungButton;
     private JButton filternButton;
-    private JTree tree1;
+    private JTree DirectoryTree;
     private JButton downloadButton;
     private JButton adminMenuButton;
     private JTextField aktenNrTextField;
+    private TreeModel treeModelView;
 
     public Mainpage(){
         setContentPane(mainPanel);
@@ -28,12 +34,17 @@ public class Mainpage extends JFrame {
         setVisible(true);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
+        File file = new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Globals.currentUser.department);
+        MyFile myFile = new MyFile(file);
+        treeModelView = new FileTreeModel(myFile);
+        DirectoryTree.setModel(treeModelView);
+
         uploadButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 if (e.getSource() == uploadButton) {
-                    Upload mainPanelUpload =new Upload();
+                    Upload mainPanelUpload = new Upload();
                 }
             }
         });
@@ -78,7 +89,6 @@ public class Mainpage extends JFrame {
 
 
     public static void main(String[] args){
-
         if(Globals.currentUser == null || Globals.currentUser.verified == 0)
         {
             JFrame frame = new LoginFrame("Company Cloud | Login");
@@ -91,7 +101,7 @@ public class Mainpage extends JFrame {
         }
         else
         {
-            Mainpage mainpage =new Mainpage();
+            Mainpage mainpage = new Mainpage();
         }
     }
 }

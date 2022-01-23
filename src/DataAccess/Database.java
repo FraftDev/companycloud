@@ -12,6 +12,7 @@ public class Database {
 
     public static final String ACCOUNT_PATH = Path.of("").toAbsolutePath() + "\\src\\DataAccess\\DabaseFiles\\Account_DB.csv";
     public static final String COMPANY_PATH = Path.of("").toAbsolutePath() + "\\src\\DataAccess\\DabaseFiles\\Company_DB.csv";
+    public static final String SERVER_PATH = Path.of("").toAbsolutePath() + "\\src\\DataAccess\\Server\\";
 
     public static List<String> GetAccounts(){
         List<String> records = new ArrayList<>();

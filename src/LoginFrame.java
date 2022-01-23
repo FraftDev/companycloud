@@ -1,6 +1,7 @@
 import DataAccess.Database;
 import DataAccess.Globals;
 import Models.Account;
+import Models.Company;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ public class LoginFrame extends JFrame {
                 else
                 {
                     Globals.currentUser = loggedAccount;
+                    Globals.currentCompany = Company.GetCompanyByName(loggedAccount.company);
                     JOptionPane.showMessageDialog(loginPanel, "Login erfolgreich, sie sind eingeloggt.");
                     dispose();
                     Mainpage mainpage =new Mainpage();

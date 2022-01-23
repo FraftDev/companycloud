@@ -33,10 +33,7 @@ public class Mainpage extends JFrame {
         setVisible(true);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
-        File file = new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Globals.currentUser.department);
-        MyFile myFile = new MyFile(file);
-        treeModelView = new FileTreeModel(myFile);
-        DirectoryTree.setModel(treeModelView);
+        updateFileTree();
 
         uploadButton.addActionListener(new ActionListener(){
             @Override
@@ -84,6 +81,12 @@ public class Mainpage extends JFrame {
                 }
             }
         });
+        aktualisierenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateFileTree();
+            }
+        });
     }
 
 
@@ -102,5 +105,12 @@ public class Mainpage extends JFrame {
         {
             Mainpage mainpage = new Mainpage();
         }
+    }
+
+    public void updateFileTree(){
+        File file = new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Globals.currentUser.department);
+        MyFile myFile = new MyFile(file);
+        treeModelView = new FileTreeModel(myFile);
+        DirectoryTree.setModel(treeModelView);
     }
 }

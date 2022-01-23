@@ -54,7 +54,7 @@ public class Adminpage extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 if (e.getSource() == registrierungenButton) {
-                    RegistrierungenAdminpage registrierungPanel =new RegistrierungenAdminpage();
+                    RegistrierungenAdminpage registrierungPanel = new RegistrierungenAdminpage();
                 }
             }
         });
@@ -72,14 +72,60 @@ public class Adminpage extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 if (e.getSource() == abteilung2AnpassenButton) {
-                    Abteilung2Adminpage abeilungs2Panel =new Abteilung2Adminpage();
+                    Abteilung2Adminpage abeilungs2Panel = new Abteilung2Adminpage();
                 }
+            }
+        });
+        zuAbteilung2WechselnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(MitarbeiterList1.isSelectionEmpty())
+                    return;
+
+                Account accountToUpdate = Account.GetAccounts().stream()
+                        .filter(x -> x.email.equals(MitarbeiterList1.getSelectedValue()))
+                        .findFirst()
+                        .orElse(null);
+
+                accountToUpdate.department = Globals.currentCompany.abteilung2;
+                Account.UpdateAccount(accountToUpdate);
+
+                if(Globals.currentUser.email.equals(accountToUpdate.email))
+                    Globals.currentUser = accountToUpdate;
+
+                SetMitarbeiterListe(1);
+                SetMitarbeiterListe(2);
+            }
+        });
+        zuAbteilung1WechselnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(MitarbeiterList2.isSelectionEmpty())
+                    return;
+
+                Account accountToUpdate = Account.GetAccounts().stream()
+                        .filter(x -> x.email.equals(MitarbeiterList2.getSelectedValue()))
+                        .findFirst()
+                        .orElse(null);
+
+                accountToUpdate.department = Globals.currentCompany.abteilung1;
+                Account.UpdateAccount(accountToUpdate);
+
+                if(Globals.currentUser.email.equals(accountToUpdate.email))
+                    Globals.currentUser = accountToUpdate;
+
+                SetMitarbeiterListe(1);
+                SetMitarbeiterListe(2);
             }
         });
     }
 
     public void SetMitarbeiterListe(int id){
         if(id == 1){
+            mitarbeiterListModel1 = new DefaultListModel();
+
             List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung1)).collect(Collectors.toList());
             for(Account account : accounts){
                 mitarbeiterListModel1.addElement(account.email);
@@ -87,6 +133,8 @@ public class Adminpage extends JFrame{
             MitarbeiterList1.setModel(mitarbeiterListModel1);
         }
         else{
+            mitarbeiterListModel2 = new DefaultListModel();
+
             List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung2)).collect(Collectors.toList());
             for(Account account : accounts){
                 mitarbeiterListModel2.addElement(account.email);

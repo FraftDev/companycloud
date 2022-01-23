@@ -18,9 +18,4 @@ public class Upload extends JFrame{
         setVisible(true);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
     }
-
-    public static void main(String[] args){
-        Upload mainPanelUpload =new Upload(); //wenn man upload selbständig öffnen möchte
-        mainPanelUpload.setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
-    }
 }

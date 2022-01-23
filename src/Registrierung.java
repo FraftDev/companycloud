@@ -48,8 +48,4 @@ public class Registrierung extends JFrame{
             }
         });
     }
-
-    public static void main(String[] args){
-        Registrierung registrierungPanel =new Registrierung();
-    }
 }

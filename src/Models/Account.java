@@ -14,8 +14,9 @@ public class Account {
     public String company;
     public String department;
     public int verified;
+    public boolean isAdmin;
 
-    public Account(String _firstName, String _lastname, String _email, String _password, LocalDate _registeredAt, String _company, String _department, int _verified){
+    public Account(String _firstName, String _lastname, String _email, String _password, LocalDate _registeredAt, String _company, String _department, int _verified, int _isAdmin){
         firstname = _firstName;
         lastname = _lastname;
         email = _email;
@@ -24,10 +25,11 @@ public class Account {
         company = _company;
         department = _department;
         verified = _verified;
+        isAdmin = _isAdmin == 1 ? true : false;
     }
 
     public String toString(){
-        return String.format("%s;%s;%s;%s;%s;%s;%s;%s", firstname, lastname, email, password, registeredAt, company, department, verified);
+        return String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s", firstname, lastname, email, password, registeredAt, company, department, verified, isAdmin ? 1 : 0);
     }
 
     public static Account Login(String _email, String _password){
@@ -55,10 +57,27 @@ public class Account {
         if(Company.GetCompanyByName(companyName) == null)
             return null;
 
-        Account registeredAccount = new Account(firstname, lastname, email, password, LocalDate.now(), companyName, Company.GetCompanyByName(companyName).abteilung1, 0);
+        Account registeredAccount = new Account(firstname, lastname, email, password, LocalDate.now(), companyName, Company.GetCompanyByName(companyName).abteilung1, 0, 0);
         Database.WriteDatabase(registeredAccount.toString(), Database.ACCOUNT_PATH);
 
         return registeredAccount;
+    }
+
+    public static void UpdateAccount(Account account)
+    {
+        List<Account> accounts = GetAccounts();
+        accounts.removeIf(x -> x.email.equals(account.email));
+        accounts.add(account);
+
+        Database.UpdateAccounts(accounts);
+    }
+
+    public static void DeleteAccount(Account account)
+    {
+        List<Account> accounts = GetAccounts();
+        accounts.removeIf(x -> x.email.equals(account.email));
+
+        Database.UpdateAccounts(accounts);
     }
 
     public static List<Account> GetAccounts(){
@@ -80,7 +99,8 @@ public class Account {
                     LocalDate.parse(accountSplit[4], DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.GERMAN)),
                     accountSplit[5],
                     accountSplit[6],
-                    Integer.parseInt(accountSplit[7])
+                    Integer.parseInt(accountSplit[7]),
+                    Integer.parseInt(accountSplit[8])
             );
 
             accountObjects.add(newAccount);

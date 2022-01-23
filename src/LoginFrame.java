@@ -51,14 +51,4 @@ public class LoginFrame extends JFrame {
             }
         });
     }
-
-    public static void main(String[] args){
-        JFrame frame = new LoginFrame("Company Cloud | Login");
-        frame.setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setSize(400, 200);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-    }
 }

@@ -1,6 +1,7 @@
 package DataAccess;
 
 import Models.Company;
+import Models.Account;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -37,7 +38,19 @@ public class Database {
         catch(IOException ex){
             ex.printStackTrace();
         }
+    }
 
+    public static void UpdateAccounts(List<Account> accounts){
+        try{
+            FileWriter writer = new FileWriter(ACCOUNT_PATH);
+            for(Account account : accounts){
+                writer.write(account.toString() + "\n");
+            }
+            writer.close();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     public static List<String> GetCompanies(){

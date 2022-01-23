@@ -1,4 +1,5 @@
 import DataAccess.Database;
+import DataAccess.Globals;
 
 import javax.swing.*;
 
@@ -21,7 +22,7 @@ public class Mainpage extends JFrame {
 
     public Mainpage(){
         setContentPane(mainPanel);
-        setTitle("Mainpage");
+        setTitle("CompanyCloud | Mainpage");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -49,7 +50,7 @@ public class Mainpage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (e.getSource() == adminMenuButton) {
+                if (e.getSource() == adminMenuButton && Globals.currentUser.isAdmin) {
                     Adminpage adminpagePanel =new Adminpage();
                 }
             }
@@ -77,6 +78,20 @@ public class Mainpage extends JFrame {
 
 
     public static void main(String[] args){
-        Mainpage mainpage =new Mainpage();//wenn man mainpage selbständig öffnen möchte
+
+        if(Globals.currentUser == null || Globals.currentUser.verified == 0)
+        {
+            JFrame frame = new LoginFrame("Company Cloud | Login");
+            frame.setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
+            frame.setResizable(false);
+            frame.setLocationRelativeTo(null);
+            frame.setSize(400, 200);
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
+        }
+        else
+        {
+            Mainpage mainpage =new Mainpage();
+        }
     }
 }

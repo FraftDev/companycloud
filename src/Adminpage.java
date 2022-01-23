@@ -1,7 +1,6 @@
 import DataAccess.Database;
 
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -31,6 +30,8 @@ public class Adminpage extends JFrame{
     private JButton abteilung2AnpassenButton;
     private JList MitarbeiterList1;
     private JList MitarbeiterList2;
+    private JButton zuAbteilung2WechselnButton;
+    private JButton zuAbteilung1WechselnButton;
     private DefaultListModel mitarbeiterListModel1 = new DefaultListModel();
     private DefaultListModel mitarbeiterListModel2 = new DefaultListModel();
 

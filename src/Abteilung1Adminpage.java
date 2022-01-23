@@ -2,16 +2,15 @@ import DataAccess.Database;
 
 import javax.swing.*;
 
-public class RegistrierungenAdminpage extends JFrame{
-    private JPanel RegistrierungMainPanel;
-    private JButton zulassenButton;
-    private JButton ablehnenButton;
-    private JList list1;
-    private JScrollBar scrollBar1;
+public class Abteilung1Adminpage extends JFrame{
+    private JPanel Abteilung1MainPanel;
+    private JTextField textField1;
+    private JButton änderungenSpeichernButton;
+    private JButton abteilungLöschenButton;
 
 
-    public  RegistrierungenAdminpage(){
-        setContentPane(RegistrierungMainPanel);
+    public  Abteilung1Adminpage(){
+        setContentPane(Abteilung1MainPanel);
         setTitle("Download");
         setSize(800, 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -22,5 +21,5 @@ public class RegistrierungenAdminpage extends JFrame{
     }
 
     public static void main(String[] args){
-        RegistrierungenAdminpage registrierungPanel =new RegistrierungenAdminpage();
+        Abteilung1Adminpage abeilungs1Panel =new Abteilung1Adminpage();
     }}

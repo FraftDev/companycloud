@@ -11,12 +11,6 @@ public class Adminpage extends JFrame{
     private JPanel SettingsStatsPanel;
     private JPanel StatsPanel;
     private JPanel SettingsPanel;
-    private JButton freeButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JButton kostenpflichtigeVersionButton;
-    private JLabel blacklist;
-    private JLabel Whitelist;
     private JProgressBar TotalBar;
     private JProgressBar IndividualBar;
     private JProgressBar DepartmentBar;
@@ -27,6 +21,8 @@ public class Adminpage extends JFrame{
     private JLabel IndividualStatusLabel;
     private JLabel DepartmentStatusLabel;
     private JButton registrierungenButton;
+    private JButton abteilung1AnpassenButton;
+    private JButton abteilung2AnpassenButton;
 
 
     public  Adminpage(){
@@ -44,6 +40,24 @@ public class Adminpage extends JFrame{
 
                 if (e.getSource() == registrierungenButton) {
                     RegistrierungenAdminpage registrierungPanel =new RegistrierungenAdminpage();
+                }
+            }
+        });
+        abteilung1AnpassenButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == abteilung1AnpassenButton) {
+                    Abteilung1Adminpage abeilungs1Panel =new Abteilung1Adminpage();
+                }
+            }
+        });
+        abteilung2AnpassenButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == abteilung2AnpassenButton) {
+                    Abteilung2Adminpage abeilungs2Panel =new Abteilung2Adminpage();
                 }
             }
         });

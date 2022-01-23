@@ -111,6 +111,25 @@ public class Mainpage extends JFrame {
                 }
             }
         });
+
+        ordnerHinzufügenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(DirectoryTree.isSelectionEmpty())
+                    return;
+
+                String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
+
+                if(selectedPath.contains("."))
+                {
+                    JOptionPane.showMessageDialog(mainPanel, "Bitte wählen sie einen Ordner aus.");
+                    return;
+                }
+
+                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\directoryName\\").mkdirs(); //implement with name here
+            }
+        });
     }
 
 

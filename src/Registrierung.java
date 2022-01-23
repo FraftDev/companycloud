@@ -1,4 +1,5 @@
 import DataAccess.Database;
+import DataAccess.Globals;
 import Models.Account;
 
 import javax.swing.*;
@@ -38,9 +39,12 @@ public class Registrierung extends JFrame{
                 if(registeredAccount == null)
                     JOptionPane.showMessageDialog(MainRegistrierungPanel, "Bitte kontaktieren Sie ihren Administrator.", "Fehler beim Registrieren.", JOptionPane.ERROR_MESSAGE);
                 else
+                {
+                    Globals.currentUser = registeredAccount;
                     JOptionPane.showMessageDialog(MainRegistrierungPanel, "Registrierung erfolgreich, so sind nun eingeloggt.");
                     dispose();
                     Mainpage mainpage = new Mainpage();
+                }
             }
         });
     }

@@ -1,4 +1,5 @@
 import DataAccess.Database;
+import DataAccess.Globals;
 import Models.Account;
 
 import javax.swing.*;
@@ -33,6 +34,7 @@ public class LoginFrame extends JFrame {
                     JOptionPane.showMessageDialog(loginPanel, "Ihr Account wurde noch nicht vom Administrator freigegeben.", "Fehler beim Login", JOptionPane.ERROR_MESSAGE);
                 else
                 {
+                    Globals.currentUser = loggedAccount;
                     JOptionPane.showMessageDialog(loginPanel, "Login erfolgreich, sie sind eingeloggt.");
                     dispose();
                     Mainpage mainpage =new Mainpage();

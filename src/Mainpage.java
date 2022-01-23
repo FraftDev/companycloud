@@ -2,9 +2,7 @@ import DataAccess.Database;
 import DataAccess.Globals;
 
 import javax.swing.*;
-import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreePath;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +22,7 @@ public class Mainpage extends JFrame {
     private JButton downloadButton;
     private JButton adminMenuButton;
     private JTextField aktenNrTextField;
+    private JButton ordnerHinzufügenButton;
     private TreeModel treeModelView;
 
     public Mainpage(){

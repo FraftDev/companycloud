@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import Extensions.*;
 
@@ -44,15 +48,6 @@ public class Mainpage extends JFrame {
                 }
             }
         });
-        downloadButton.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (e.getSource() == downloadButton) {
-                    Download downloadPanel =new Download();
-                }
-            }
-        });
         adminMenuButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +80,35 @@ public class Mainpage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateFileTree();
+            }
+        });
+
+        downloadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
+
+                if(!selectedPath.contains("."))
+                {
+                    JOptionPane.showMessageDialog(mainPanel, "Bitte wählen sie eine Datei aus.");
+                    return;
+                }
+
+                JFileChooser fileSaver = new JFileChooser();
+
+                if(fileSaver.showSaveDialog(null) != JFileChooser.APPROVE_OPTION)
+                    return;
+
+                Path copyToPath = Path.of(fileSaver.getSelectedFile().getPath());
+                Path copyFromPath =  Path.of(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath);
+
+                try {
+                    Files.copy(copyFromPath, copyToPath, StandardCopyOption.REPLACE_EXISTING);
+                    JOptionPane.showMessageDialog(mainPanel, "Ihre Datei wurde erfolgreich heruntergeladen.", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(mainPanel, "Es trat ein Fehler auf, bitte kontaktieren Sie ihren Administrator, wenn das Problem vermehrt auftritt.", "Fehler", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

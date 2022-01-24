@@ -20,8 +20,8 @@ public class Mainpage extends JFrame {
     private JPanel mainPanel;
     private JButton uploadButton;
     private JButton aktualisierenButton;
-    private JButton sortierungButton;
-    private JButton filternButton;
+    private JButton renameButton;
+    private JButton löschenButton;
     private JTree DirectoryTree;
     private JButton downloadButton;
     private JButton adminMenuButton;
@@ -48,6 +48,16 @@ public class Mainpage extends JFrame {
                 }
             }
         });
+        renameButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == renameButton ) {
+                    Rename renamePanel =new Rename();
+                }
+            }
+        });
+
         adminMenuButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,7 +125,9 @@ public class Mainpage extends JFrame {
         ordnerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (e.getSource() == ordnerHinzufügenButton ) {
+                    OrdnerFenster ordnerFenster =new OrdnerFenster();
+                }
                 if(DirectoryTree.isSelectionEmpty())
                     return;
 
@@ -126,6 +138,7 @@ public class Mainpage extends JFrame {
                     JOptionPane.showMessageDialog(mainPanel, "Bitte wählen sie einen Ordner aus.");
                     return;
                 }
+
 
                 new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\directoryName\\").mkdirs(); //implement with name here
             }

@@ -6,6 +6,7 @@ import Models.Account;
 import java.nio.file.Path;
 import java.util.*;
 import java.io.*;
+import java.util.concurrent.ConcurrentMap;
 
 public class Database {
     public static final String ICON_PATH = Path.of("").toAbsolutePath() + "\\src\\Images\\icon.png";
@@ -46,6 +47,19 @@ public class Database {
             FileWriter writer = new FileWriter(ACCOUNT_PATH);
             for(Account account : accounts){
                 writer.write(account.toString() + "\n");
+            }
+            writer.close();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public static void UpdateCompanies(List<Company> companies){
+        try{
+            FileWriter writer = new FileWriter(COMPANY_PATH);
+            for(Company company : companies){
+                writer.write(company.toString() + "\n");
             }
             writer.close();
         }

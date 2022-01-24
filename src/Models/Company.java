@@ -24,11 +24,24 @@ public class Company {
         abteilung2 = _abteilung2;
     }
 
+    public String toString(){
+        return String.format("%s;%s;%s;%s;%s;%s", id, name, adresse, domain, abteilung1, abteilung2);
+    }
+
     public static Company GetCompanyByName(String companyName){
         return GetCompanies().stream()
                 .filter(x -> x.name.equals(companyName))
                 .findAny()
                 .orElse(null);
+    }
+
+    public static void UpdateCompany(Company company)
+    {
+        List<Company> companies = GetCompanies();
+        companies.removeIf(x -> x.name.equals(company.name));
+        companies.add(company);
+
+        Database.UpdateCompanies(companies);
     }
 
     public static List<Company> GetCompanies(){

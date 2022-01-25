@@ -32,6 +32,7 @@ public class Mainpage extends JFrame {
     private JButton ordnerHinzufügenButton;
     private JLabel DateiName;
     private JList DateiInfo;
+    private JTextField textNeuerOrdner;
     private JLabel textPane1;
     private TreeModel treeModelView;
     private DefaultListModel<String> fileInfoModel = new DefaultListModel<>();
@@ -46,6 +47,24 @@ public class Mainpage extends JFrame {
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
         updateFileTree();
+        textNeuerOrdner.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (textNeuerOrdner.getText().equals("")) {
+                    textNeuerOrdner.setText("Name des Ordners");
+                }
+            }
+        });
+        textNeuerOrdner.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (textNeuerOrdner.getText().equals("Name des Ordners")) {
+                    textNeuerOrdner.setText("");
+                }
+            }
+        });
 
         uploadButton.addActionListener(new ActionListener(){
             @Override
@@ -53,6 +72,15 @@ public class Mainpage extends JFrame {
 
                 if (e.getSource() == uploadButton) {
                     Upload mainPanelUpload = new Upload();
+                }
+            }
+        });
+        renameButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (e.getSource() == renameButton ) {
+                    Rename renamePanel =new Rename();
                 }
             }
         });

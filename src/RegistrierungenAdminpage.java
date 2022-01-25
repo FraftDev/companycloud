@@ -19,7 +19,7 @@ public class RegistrierungenAdminpage extends JFrame{
     public  RegistrierungenAdminpage(){
         setContentPane(RegistrierungMainPanel);
         setTitle("CompanyCloud | Registrierungen Zulassen");
-        setSize(800, 400);
+        setSize(400, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);

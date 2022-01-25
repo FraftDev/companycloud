@@ -18,8 +18,8 @@ public class Abteilung1Adminpage extends JFrame{
 
     public  Abteilung1Adminpage(){
         setContentPane(Abteilung1MainPanel);
-        setTitle("Download");
-        setSize(800, 400);
+        setTitle("Abteilung 1");
+        setSize(400, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);

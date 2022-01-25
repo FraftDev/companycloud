@@ -17,8 +17,8 @@ public class Abteilung2Adminpage extends JFrame{
 
     public  Abteilung2Adminpage(){
         setContentPane(Abteilung2Mainpanel);
-        setTitle("Download");
-        setSize(800, 400);
+        setTitle("Abteilung 2");
+        setSize(400, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);

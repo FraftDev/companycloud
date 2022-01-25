@@ -2,6 +2,8 @@ import DataAccess.Database;
 import DataAccess.Globals;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreeModel;
 
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
 
 import Extensions.*;
 
@@ -27,7 +30,12 @@ public class Mainpage extends JFrame {
     private JButton adminMenuButton;
     private JTextField aktenNrTextField;
     private JButton ordnerHinzufügenButton;
+    private JLabel DateiName;
+    private JList DateiInfo;
+    private JLabel textPane1;
     private TreeModel treeModelView;
+    private DefaultListModel<String> fileInfoModel = new DefaultListModel<>();
+
 
     public Mainpage(){
         setContentPane(mainPanel);
@@ -68,24 +76,6 @@ public class Mainpage extends JFrame {
             }
         });
 
-        aktenNrTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                if (aktenNrTextField.getText().equals("")){
-                    aktenNrTextField.setText("Akten Nr.");
-                }
-            }
-        });
-        aktenNrTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (aktenNrTextField.getText().equals("Akten Nr.")){
-                    aktenNrTextField.setText("");
-                }
-            }
-        });
         aktualisierenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,7 +116,7 @@ public class Mainpage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == ordnerHinzufügenButton ) {
-                    OrdnerFenster ordnerFenster =new OrdnerFenster();
+                    OrdnerFenster ordnerFenster = new OrdnerFenster();
                 }
                 if(DirectoryTree.isSelectionEmpty())
                     return;
@@ -139,8 +129,73 @@ public class Mainpage extends JFrame {
                     return;
                 }
 
+                OrdnerFenster ordnerFenster = new OrdnerFenster();
 
-                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\directoryName\\").mkdirs(); //implement with name here
+                while(ordnerFenster.publicOrdnerName == null) { }
+
+                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\" + ordnerFenster.publicOrdnerName + "\\").mkdirs(); //implement with name here
+            }
+        });
+
+        DirectoryTree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                if(DirectoryTree.isSelectionEmpty())
+                    return;
+
+                String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
+
+                if(!selectedPath.contains("."))
+                {
+                    fileInfoModel = new DefaultListModel<>();
+                    DateiInfo.setModel(fileInfoModel);
+                    DateiName.setText("Name der Datei");
+                    return;
+                }
+
+                fileInfoModel = new DefaultListModel<>();
+
+                Path fullSelectedPath = Path.of(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath);
+
+                String fileName =  Path.of(selectedPath).getFileName().toString();
+                long fileSize = 0;
+                FileTime fileLastModified = null;
+
+                try {
+                    fileSize = Files.size(fullSelectedPath);
+                    fileLastModified = Files.getLastModifiedTime(fullSelectedPath);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+                DateiName.setText(fileName);
+
+                fileInfoModel.addElement("Dateiname: " + fileName);
+                fileInfoModel.addElement("Dateigröße: " + fileSize / 1000 + "kb");
+                fileInfoModel.addElement("Letzes Mal bearbeitet: " + fileLastModified.toString());
+
+                DateiInfo.setModel(fileInfoModel);
+            }
+        });
+        löschenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(DirectoryTree.isSelectionEmpty())
+                    return;
+
+                String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
+
+                if(!selectedPath.contains("."))
+                    return;
+
+                if(JOptionPane.showConfirmDialog(mainPanel, "Wollen Sie die Datei wirklich löschen?.", "Sind Sie sich sicher?", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
+                    return;
+
+                try {
+                    Files.delete(Path.of(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
     }

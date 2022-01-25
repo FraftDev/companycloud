@@ -7,6 +7,7 @@ import java.awt.event.FocusEvent;
 public class Rename extends JFrame{
     private JPanel renamePanel;
     private JTextField Rename;
+    public String ordnerName;
 
     public Rename(){
         setContentPane(renamePanel);

@@ -62,6 +62,14 @@ public class Upload extends JFrame{
                 }
 
                 updateFileTree();
+
+                Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\Log.txt", "Nutzer hat " + copyToPath.getFileName() + " heruntergeladen.");
+            }
+        });
+        speichernButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
     }
@@ -71,5 +79,6 @@ public class Upload extends JFrame{
         MyFile myFile = new MyFile(file);
         treeModelView = new FileTreeModel(myFile);
         tree1.setModel(treeModelView);
+        JTreeExtensions.expandAllNodes(tree1);
     }
 }

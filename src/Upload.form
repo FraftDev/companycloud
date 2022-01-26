@@ -60,31 +60,23 @@
         <children>
           <component id="6e9ce" class="javax.swing.JButton" binding="vomPCButton" default-binding="true">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Vom PC"/>
               <toolTipText value="Die Datei vom PC hochladen"/>
             </properties>
           </component>
-          <component id="7bed4" class="javax.swing.JLabel">
+          <vspacer id="e7fee">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties>
-              <font size="14"/>
-              <text value="Drag and Drop"/>
-            </properties>
-          </component>
-          <component id="2b57c" class="javax.swing.JLabel">
+          </vspacer>
+          <vspacer id="18c4">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties>
-              <font size="8"/>
-              <text value="or"/>
-            </properties>
-          </component>
+          </vspacer>
         </children>
       </grid>
       <component id="5d0f7" class="javax.swing.JSeparator">

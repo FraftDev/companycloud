@@ -1,6 +1,9 @@
 package Models;
 import DataAccess.Database;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 import java.time.*;
 import java.time.format.*;
@@ -40,7 +43,16 @@ public class Account {
                 .orElse(null);
     }
 
-
+    public void Log(String pathToLog, String messageToLog){
+        try{
+            FileWriter writer = new FileWriter(pathToLog, true);
+            writer.write("\nNutzer: " + this.email + " | Message: " + messageToLog);
+            writer.close();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
 
     public static Account Register(String firstname, String lastname, String email, String password, String companyName)
     {

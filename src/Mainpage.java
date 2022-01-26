@@ -75,24 +75,6 @@ public class Mainpage extends JFrame {
                 }
             }
         });
-        renameButton.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (e.getSource() == renameButton ) {
-                    Rename renamePanel =new Rename();
-                }
-            }
-        });
-        renameButton.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                if (e.getSource() == renameButton ) {
-                    Rename renamePanel =new Rename();
-                }
-            }
-        });
 
         adminMenuButton.addActionListener(new ActionListener(){
             @Override
@@ -137,6 +119,10 @@ public class Mainpage extends JFrame {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(mainPanel, "Es trat ein Fehler auf, bitte kontaktieren Sie ihren Administrator, wenn das Problem vermehrt auftritt.", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
+
+                Path currentFilePath = Path.of(Database.SERVER_PATH + "\\" + Globals.currentUser.company + "\\" + selectedPath);
+
+                Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" + currentFilePath.getParent().toString() + "\\Log.txt", "Nutzer hat " + currentFilePath.getFileName() + " heruntergeladen.");
             }
         });
 
@@ -158,8 +144,10 @@ public class Mainpage extends JFrame {
                     return;
                 }
 
+                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\" + textFolderRename.getText() + "\\").mkdirs();
+                updateFileTree();
 
-                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\" + textFolderRename.getText() + "\\").mkdirs(); //implement with name here
+                Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Path.of(selectedPath).getParent().toString() + "\\Log.txt", "Nutzer hat " + textFolderRename.getText() + " (Ordner) erstellt.");
             }
         });
 
@@ -211,10 +199,10 @@ public class Mainpage extends JFrame {
 
                 String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
 
-                if(!selectedPath.contains("."))
+                if(!selectedPath.contains(".") && !Globals.currentUser.isAdmin)
                     return;
 
-                if(JOptionPane.showConfirmDialog(mainPanel, "Wollen Sie die Datei wirklich löschen?.", "Sind Sie sich sicher?", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
+                if(JOptionPane.showConfirmDialog(mainPanel, "Wollen Sie die Datei/Ordner wirklich löschen?.", "Sind Sie sich sicher?", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)
                     return;
 
                 try {
@@ -222,6 +210,42 @@ public class Mainpage extends JFrame {
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
+
+                updateFileTree();
+
+                Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" +  Path.of(selectedPath).getParent().toString() + "\\Log.txt", "Nutzer hat " + Path.of(selectedPath).getFileName() + " gelöscht.");
+            }
+        });
+        renameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(DirectoryTree.isSelectionEmpty())
+                    return;
+
+                if(textFolderRename.getText() == null)
+                    return;
+
+                String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
+
+                if(selectedPath.contains(".") && !textFolderRename.getText().contains("."))
+                {
+                    JOptionPane.showMessageDialog(mainPanel, "Wenn sie eine Datei umbenennen, geben Sie bitte eine Datei-Extension an.");
+                    return;
+                }
+
+                Path oldFilePath = Path.of(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath);
+                Path newFilePath = Path.of(oldFilePath.getParent().toAbsolutePath() + "\\" + textFolderRename.getText());
+
+                try {
+                    Files.move(oldFilePath, newFilePath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+                updateFileTree();
+
+                Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" +  Path.of(selectedPath).getParent().toString() + "\\Log.txt", "Nutzer hat " + oldFilePath.getFileName() + " in " + newFilePath.getFileName() + " umgenannt.");
             }
         });
     }
@@ -249,5 +273,6 @@ public class Mainpage extends JFrame {
         MyFile myFile = new MyFile(file);
         treeModelView = new FileTreeModel(myFile);
         DirectoryTree.setModel(treeModelView);
+        JTreeExtensions.expandAllNodes(DirectoryTree);
     }
 }

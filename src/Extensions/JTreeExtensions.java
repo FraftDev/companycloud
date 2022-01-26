@@ -3,7 +3,16 @@ package Extensions;
 import javax.swing.*;
 import java.io.File;
 
+/**
+ * To handle all the Extensions of a FileTree
+ */
 public class JTreeExtensions {
+    /**
+     * Gets the path of a given tree
+     *
+     * @param tree tree object, whose path is to be retrieved
+     * @return path to that tree
+     */
     public static String GetPath(JTree tree){
         String jTreeVarSelectedPath = "";
         Object[] paths = tree.getSelectionPath().getPath();
@@ -17,6 +26,11 @@ public class JTreeExtensions {
         return jTreeVarSelectedPath;
     }
 
+    /**
+     * Expands all the nodes of a tree
+     *
+     * @param tree the tree, whose nodes are to be expanded
+     */
     public static void expandAllNodes(JTree tree) {
         int j = tree.getRowCount();
         int i = 0;

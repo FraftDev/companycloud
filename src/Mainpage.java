@@ -32,7 +32,7 @@ public class Mainpage extends JFrame {
     private JButton downloadButton;
     private JButton adminMenuButton;
     private JTextField aktenNrTextField;
-    private JButton ordnerHinzufÃ¼genButton;
+    private JButton ordnerHinzufügenButton;
     private JLabel DateiName;
     private JList DateiInfo;
     private JTextField textFolderRename;
@@ -134,7 +134,7 @@ public class Mainpage extends JFrame {
         });
 
         // This Button adds a new folder to the current working directory
-        ordnerHinzufÃ¼genButton.addActionListener(new ActionListener() {
+        ordnerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

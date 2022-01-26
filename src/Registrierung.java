@@ -40,10 +40,9 @@ public class Registrierung extends JFrame{
                     JOptionPane.showMessageDialog(MainRegistrierungPanel, "Bitte kontaktieren Sie ihren Administrator.", "Fehler beim Registrieren.", JOptionPane.ERROR_MESSAGE);
                 else
                 {
-                    Globals.currentUser = registeredAccount;
-                    JOptionPane.showMessageDialog(MainRegistrierungPanel, "Registrierung erfolgreich, so sind nun eingeloggt.");
+                    //Globals.currentUser = registeredAccount;
+                    JOptionPane.showMessageDialog(MainRegistrierungPanel, "Registrierung erfolgreich, bitte lassen Sie ihren Account von einem Administrator aktivieren.");
                     dispose();
-                    Mainpage mainpage = new Mainpage();
                 }
             }
         });

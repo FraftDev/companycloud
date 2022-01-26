@@ -32,7 +32,7 @@ public class Mainpage extends JFrame {
     private JButton ordnerHinzufügenButton;
     private JLabel DateiName;
     private JList DateiInfo;
-    private JTextField textNeuerOrdner;
+    private JTextField textFolderRename;
     private JLabel textPane1;
     private TreeModel treeModelView;
     private DefaultListModel<String> fileInfoModel = new DefaultListModel<>();
@@ -47,21 +47,21 @@ public class Mainpage extends JFrame {
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
         updateFileTree();
-        textNeuerOrdner.addFocusListener(new FocusAdapter() {
+        textFolderRename.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (textNeuerOrdner.getText().equals("")) {
-                    textNeuerOrdner.setText("Name des Ordners");
+                if (textFolderRename.getText().equals("")) {
+                    textFolderRename.setText("Name des Ordners");
                 }
             }
         });
-        textNeuerOrdner.addFocusListener(new FocusAdapter() {
+        textFolderRename.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                if (textNeuerOrdner.getText().equals("Name des Ordners")) {
-                    textNeuerOrdner.setText("");
+                if (textFolderRename.getText().equals("Name des Ordners")) {
+                    textFolderRename.setText("");
                 }
             }
         });
@@ -143,10 +143,11 @@ public class Mainpage extends JFrame {
         ordnerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == ordnerHinzufügenButton ) {
-                    OrdnerFenster ordnerFenster = new OrdnerFenster();
-                }
+
                 if(DirectoryTree.isSelectionEmpty())
+                    return;
+
+                if(textFolderRename.getText() == null)
                     return;
 
                 String selectedPath = JTreeExtensions.GetPath(DirectoryTree);
@@ -157,11 +158,8 @@ public class Mainpage extends JFrame {
                     return;
                 }
 
-                OrdnerFenster ordnerFenster = new OrdnerFenster();
 
-                while(ordnerFenster.publicOrdnerName == null) { }
-
-                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\" + ordnerFenster.publicOrdnerName + "\\").mkdirs(); //implement with name here
+                new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\" + textFolderRename.getText() + "\\").mkdirs(); //implement with name here
             }
         });
 

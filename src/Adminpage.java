@@ -126,7 +126,11 @@ public class Adminpage extends JFrame{
         if(id == 1){
             mitarbeiterListModel1 = new DefaultListModel();
 
-            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung1)).collect(Collectors.toList());
+            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung1) &&
+                    x.company.equals(Globals.currentCompany.name) &&
+                    x.verified == 1)
+                    .collect(Collectors.toList());
+
             for(Account account : accounts){
                 mitarbeiterListModel1.addElement(account.email);
             }
@@ -135,7 +139,11 @@ public class Adminpage extends JFrame{
         else{
             mitarbeiterListModel2 = new DefaultListModel();
 
-            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung2)).collect(Collectors.toList());
+            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung2) &&
+                    x.company.equals(Globals.currentCompany.name) &&
+                    x.verified == 1)
+                    .collect(Collectors.toList());
+
             for(Account account : accounts){
                 mitarbeiterListModel2.addElement(account.email);
             }

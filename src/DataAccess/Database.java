@@ -8,6 +8,9 @@ import java.util.*;
 import java.io.*;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * Class to handle the Databases, including addition and deletion of entries
+ */
 public class Database {
     public static final String ICON_PATH = Path.of("").toAbsolutePath() + "\\src\\Images\\icon.png";
 

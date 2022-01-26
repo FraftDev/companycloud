@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 
+/**
+ * To create the Adminpage for adjusting the Department 2
+ */
 public class Abteilung2Adminpage extends JFrame{
     private JPanel Abteilung2Mainpanel;
     private JTextField AbteilungsName;
@@ -24,6 +27,7 @@ public class Abteilung2Adminpage extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
+        // This Button will change the department name of department 1
         änderungen2SpeichernButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

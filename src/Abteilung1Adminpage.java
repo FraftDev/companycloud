@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To create the Adminpage for adjusting the Department 1
+ * This JFrame displays and handles the Adminpage for adjusting the Department 1
  */
 public class Abteilung1Adminpage extends JFrame{
     private JPanel Abteilung1MainPanel;

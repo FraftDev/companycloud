@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This JFrame displays and handles the Adminpage that show the open registrations
+ * Here an Admin can deny or accept open registrations
+ */
 public class RegistrierungenAdminpage extends JFrame{
     private JPanel RegistrierungMainPanel;
     private JButton zulassenButton;
@@ -33,6 +37,7 @@ public class RegistrierungenAdminpage extends JFrame{
         }
 
         UserList.setModel(defaultListModel);
+        // This Button accepts a registration and verifies the User in the Database
         zulassenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +60,7 @@ public class RegistrierungenAdminpage extends JFrame{
                 JOptionPane.showMessageDialog(RegistrierungMainPanel, "Der Nutzer wurde erfolgreich freigegeben.", "Nutzer freigegeben", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+        // This Button rejecs a registration and deletes the User in the Database
         ablehnenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This JFrame displays and handles the Registration Page
+ */
 public class Registrierung extends JFrame{
     private JTextField Company;
     private JTextField Firstname;

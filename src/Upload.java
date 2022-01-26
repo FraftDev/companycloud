@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * This JFrame displays and handles the Upload Page
+ */
 public class Upload extends JFrame{
     private JPanel mainPanelUpload;
     private JTree tree1;
@@ -33,6 +36,7 @@ public class Upload extends JFrame{
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
         updateFileTree();
+        // This button lets users upload files to the system from their local harddrive
         vomPCButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +70,7 @@ public class Upload extends JFrame{
                 Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" + selectedPath + "\\Log.txt", "Nutzer hat " + copyToPath.getFileName() + " heruntergeladen.");
             }
         });
+        // This button saves the changes
         speichernButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +79,9 @@ public class Upload extends JFrame{
         });
     }
 
+    /**
+     * Updates the current file tree
+     */
     public void updateFileTree(){
         File file = new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Globals.currentUser.department);
         MyFile myFile = new MyFile(file);

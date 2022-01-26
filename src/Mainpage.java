@@ -19,6 +19,9 @@ import java.nio.file.attribute.FileTime;
 
 import Extensions.*;
 
+/**
+ * This JFrame displays and handles the Mainpage of the App
+ */
 public class Mainpage extends JFrame {
     private JPanel mainPanel;
     private JButton uploadButton;
@@ -66,6 +69,7 @@ public class Mainpage extends JFrame {
             }
         });
 
+        // This Button opens the Upload window
         uploadButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,6 +80,7 @@ public class Mainpage extends JFrame {
             }
         });
 
+        // This Button opens the Adminpage, if the current user is an admin
         adminMenuButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,6 +91,7 @@ public class Mainpage extends JFrame {
             }
         });
 
+        // This Button refreshes the page
         aktualisierenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,6 +99,7 @@ public class Mainpage extends JFrame {
             }
         });
 
+        // This Button opens the Download Window
         downloadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +133,7 @@ public class Mainpage extends JFrame {
             }
         });
 
+        // This Button adds a new folder to the current working directory
         ordnerHinzufügenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,6 +199,7 @@ public class Mainpage extends JFrame {
                 DateiInfo.setModel(fileInfoModel);
             }
         });
+        // This Button delete a File or Folder
         löschenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -216,6 +225,7 @@ public class Mainpage extends JFrame {
                 Globals.currentUser.Log(Database.SERVER_PATH + Globals.currentUser.company + "\\" +  Path.of(selectedPath).getParent().toString() + "\\Log.txt", "Nutzer hat " + Path.of(selectedPath).getFileName() + " gelöscht.");
             }
         });
+        // This Button renames a File or Folder
         renameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,6 +278,9 @@ public class Mainpage extends JFrame {
         }
     }
 
+    /**
+     * Updates the current filetree
+     */
     public void updateFileTree(){
         File file = new File(Database.SERVER_PATH + Globals.currentUser.company + "\\" + Globals.currentUser.department);
         MyFile myFile = new MyFile(file);

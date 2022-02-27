@@ -10,6 +10,9 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This JFrame displays and handles the Adminpage for adjusting the Department 1
+ */
 public class Abteilung1Adminpage extends JFrame{
     private JPanel Abteilung1MainPanel;
     private JTextField AbteilungsName;
@@ -18,14 +21,15 @@ public class Abteilung1Adminpage extends JFrame{
 
     public  Abteilung1Adminpage(){
         setContentPane(Abteilung1MainPanel);
-        setTitle("Download");
-        setSize(800, 400);
+        setTitle("Abteilung 1");
+        setSize(400, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setIconImage(new ImageIcon(Database.ICON_PATH).getImage());
 
+        // This Button will change the department name of department 1
         änderungenSpeichernButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -2,6 +2,9 @@ import DataAccess.Database;
 
 import javax.swing.*;
 
+/**
+ * This JFrame displays and handles the Download Page
+ */
 public class Download extends JFrame{
     private JTree treeDownload;
     private JButton downloadButton;

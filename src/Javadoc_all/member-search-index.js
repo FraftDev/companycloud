@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"Extensions","c":"MyFile","l":"getFile()"},{"p":"Extensions","c":"MyFile","l":"isDirectory()"},{"p":"Extensions","c":"MyFile","l":"listFiles()"},{"p":"Extensions","c":"MyFile","l":"MyFile(File)","u":"%3Cinit%3E(java.io.File)"},{"p":"Extensions","c":"MyFile","l":"toString()"}];updateSearchResults();

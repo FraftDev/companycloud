@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This JFrame displays and handles the Loginframe
+ */
 public class LoginFrame extends JFrame {
     private JPanel loginPanel;
     private JTextField emailBox;
@@ -21,6 +24,8 @@ public class LoginFrame extends JFrame {
         this.setContentPane(loginPanel);
         this.pack();
 
+        // This button check if the login is succesful
+        // It opens the mainpage if yes, and displays an error message if not.
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,11 +50,11 @@ public class LoginFrame extends JFrame {
 
             }
         });
-
+        // This button opens the Registration Page
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Registrierung MainRegistrierungPanel = new Registrierung();
             }
         });
     }

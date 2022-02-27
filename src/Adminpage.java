@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import DataAccess.Globals;
 import Models.*;
 
+/**
+ * This JFrame displays and handles the Adminpage
+ */
 public class Adminpage extends JFrame{
     private JPanel AdminpagePanel;
     private JPanel LogsPanel;
@@ -49,6 +52,7 @@ public class Adminpage extends JFrame{
         SetMitarbeiterListe(1);
         SetMitarbeiterListe(2);
 
+        // This Button opens the Registrations page, with the new members
         registrierungenButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +62,7 @@ public class Adminpage extends JFrame{
                 }
             }
         });
+        // This Button opens the Page to adjust the Department 1
         abteilung1AnpassenButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,6 +72,7 @@ public class Adminpage extends JFrame{
                 }
             }
         });
+        // This Button opens the Page to adjust the Department 2
         abteilung2AnpassenButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,6 +82,7 @@ public class Adminpage extends JFrame{
                 }
             }
         });
+        // This button switches the selected User from Department 1 to the Department 2
         zuAbteilung2WechselnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,6 +105,7 @@ public class Adminpage extends JFrame{
                 SetMitarbeiterListe(2);
             }
         });
+        // This button switches the selected User from Department 2 to the Department 1
         zuAbteilung1WechselnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,11 +130,20 @@ public class Adminpage extends JFrame{
         });
     }
 
+    /**
+     * Sets the List in the UI with the Employees from the current company
+     *
+     * @param id Company ID from the Company Database
+     */
     public void SetMitarbeiterListe(int id){
         if(id == 1){
             mitarbeiterListModel1 = new DefaultListModel();
 
-            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung1)).collect(Collectors.toList());
+            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung1) &&
+                    x.company.equals(Globals.currentCompany.name) &&
+                    x.verified == 1)
+                    .collect(Collectors.toList());
+
             for(Account account : accounts){
                 mitarbeiterListModel1.addElement(account.email);
             }
@@ -135,7 +152,11 @@ public class Adminpage extends JFrame{
         else{
             mitarbeiterListModel2 = new DefaultListModel();
 
-            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung2)).collect(Collectors.toList());
+            List<Account> accounts = Account.GetAccounts().stream().filter(x -> x.department.equals(Globals.currentCompany.abteilung2) &&
+                    x.company.equals(Globals.currentCompany.name) &&
+                    x.verified == 1)
+                    .collect(Collectors.toList());
+
             for(Account account : accounts){
                 mitarbeiterListModel2.addElement(account.email);
             }

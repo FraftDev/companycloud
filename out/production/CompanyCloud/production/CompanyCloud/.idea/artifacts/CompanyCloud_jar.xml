@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CompanyCloud:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CompanyCloud_jar</output-path>
+    <root id="archive" name="CompanyCloud.jar">
+      <element id="module-output" name="CompanyCloud" />
+    </root>
+  </artifact>
+</component>

@@ -30,7 +30,6 @@ public class Database {
     }
 
     public static void WriteDatabase(String line, String path){
-
         try{
             FileWriter writer = new FileWriter(path, true);
             writer.write("\n"
